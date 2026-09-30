@@ -10,7 +10,7 @@ config/name="Cờ Tướng Xung Kích"
 config/description="Production-ready responsive 2D Chinese Chess (Xiangqi / Cờ Tướng Xung Kích) game client for mobile & desktop."
 config/version="1.0.0"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(0.0862745, 0.0901961, 0.109804, 1)
 config/icon="res://icon.png"
 
@@ -38,6 +38,7 @@ pointing/emulate_mouse_from_touch=true
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.101961, 0.109804, 0.133333, 1)

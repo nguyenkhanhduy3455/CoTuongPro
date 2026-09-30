@@ -59,17 +59,21 @@ export function buildServer(): {
       const playerId = query.playerId || query.id || randomUUID();
       const name = query.name || `Player_${playerId.slice(0, 5)}`;
 
+      console.log(`[WS-SERVER] Incoming connection: playerId=${playerId}, name=${name}, IP=${req.ip}`);
       wsHandler.handleConnection(socket, playerId, name);
 
       socket.on('message', async (data: Buffer | string) => {
+        console.log(`[WS-SERVER] Message from ${playerId}: ${data.toString()}`);
         await wsHandler.handleMessage(socket, data);
       });
 
-      socket.on('close', () => {
+      socket.on('close', (code, reason) => {
+        console.log(`[WS-SERVER] Disconnected: playerId=${playerId}, code=${code}, reason=${reason}`);
         wsHandler.handleDisconnection(socket);
       });
 
       socket.on('error', (err) => {
+        console.error(`[WS-SERVER] Error for ${playerId}:`, err);
         req.log.error({ err, playerId }, 'WebSocket client error');
         wsHandler.handleDisconnection(socket);
       });

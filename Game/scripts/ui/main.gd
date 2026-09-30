@@ -43,12 +43,19 @@ func _on_play_online_queue() -> void:
 	matchmaking_lobby.show_queue_mode(1)
 
 func _on_create_room() -> void:
-	NetworkManager.connect_to_server()
-	# Wait for connection, then send create
+	print("[MAIN] User clicked 'Tạo phòng riêng'")
+	main_menu.visible = false
+	matchmaking_lobby.visible = true
+	matchmaking_lobby.show_queue_mode(1)
+
 	if NetworkManager.is_connected:
+		print("[MAIN] Socket already open, sending ROOM_CREATE")
 		NetworkManager.create_custom_room()
 	else:
+		print("[MAIN] Socket connecting, waiting for connected_to_server signal...")
+		NetworkManager.connect_to_server()
 		NetworkManager.connected_to_server.connect(func():
+			print("[MAIN] Connection established! Sending ROOM_CREATE...")
 			NetworkManager.create_custom_room()
 		, CONNECT_ONE_SHOT)
 
@@ -59,15 +66,21 @@ func _on_open_join_modal() -> void:
 func _on_join_room_confirmed() -> void:
 	var code := room_code_input.text.strip_edges().to_upper()
 	if code.length() >= 4:
-		NetworkManager.connect_to_server()
+		print("[MAIN] User joining room: ", code)
+		main_menu.visible = false
+		matchmaking_lobby.visible = true
+		matchmaking_lobby.show_queue_mode(1)
+
 		if NetworkManager.is_connected:
 			NetworkManager.join_custom_room(code)
 		else:
+			NetworkManager.connect_to_server()
 			NetworkManager.connected_to_server.connect(func():
 				NetworkManager.join_custom_room(code)
 			, CONNECT_ONE_SHOT)
 
 func _on_cancel_lobby() -> void:
+	print("[MAIN] User cancelled lobby")
 	NetworkManager.cancel_queue()
 	_show_main_menu()
 

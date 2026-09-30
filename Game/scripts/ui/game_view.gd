@@ -13,11 +13,18 @@ enum GameMode {
 @onready var top_bank_label: Label = $TopPlayerHUD/HBoxContainer/TimeContainer/BankLabel
 @onready var top_turn_label: Label = $TopPlayerHUD/HBoxContainer/TimeContainer/TurnLabel
 @onready var top_status_label: Label = $TopPlayerHUD/HBoxContainer/VBoxContainer/StatusLabel
+@onready var top_turn_progress: ProgressBar = $TopPlayerHUD/HBoxContainer/VBoxContainer/TurnProgressBar
 
 @onready var bottom_name_label: Label = $BottomPlayerHUD/HBoxContainer/VBoxContainer/NameLabel
 @onready var bottom_bank_label: Label = $BottomPlayerHUD/HBoxContainer/TimeContainer/BankLabel
 @onready var bottom_turn_label: Label = $BottomPlayerHUD/HBoxContainer/TimeContainer/TurnLabel
 @onready var bottom_status_label: Label = $BottomPlayerHUD/HBoxContainer/VBoxContainer/StatusLabel
+@onready var bottom_turn_progress: ProgressBar = $BottomPlayerHUD/HBoxContainer/VBoxContainer/TurnProgressBar
+
+var _fill_style_top: StyleBoxFlat = StyleBoxFlat.new()
+var _fill_style_bottom: StyleBoxFlat = StyleBoxFlat.new()
+var _bg_style_top: StyleBoxFlat = StyleBoxFlat.new()
+var _bg_style_bottom: StyleBoxFlat = StyleBoxFlat.new()
 
 @onready var resign_button: Button = $ActionBar/ResignButton
 @onready var draw_button: Button = $ActionBar/DrawButton
@@ -50,6 +57,7 @@ func _ready() -> void:
 	$GameOverDialog/Panel/VBoxContainer/MenuButton.pressed.connect(func(): back_to_menu_requested.emit())
 	$GameOverDialog/Panel/VBoxContainer/RematchButton.pressed.connect(_on_rematch_pressed)
 
+	_setup_progress_bar_styles()
 	_setup_network_signals()
 
 func _process(delta: float) -> void:
@@ -314,6 +322,19 @@ func _end_game(winner: XiangqiTypes.PieceColor, reason: String, is_draw: bool = 
 
 	game_over_subtitle.text = reason
 
+func _setup_progress_bar_styles() -> void:
+	_fill_style_top.set_corner_radius_all(4)
+	_fill_style_bottom.set_corner_radius_all(4)
+	_bg_style_top.set_corner_radius_all(4)
+	_bg_style_bottom.set_corner_radius_all(4)
+	_bg_style_top.bg_color = Color(0.12, 0.14, 0.18, 0.9)
+	_bg_style_bottom.bg_color = Color(0.12, 0.14, 0.18, 0.9)
+
+	top_turn_progress.add_theme_stylebox_override("fill", _fill_style_top)
+	top_turn_progress.add_theme_stylebox_override("background", _bg_style_top)
+	bottom_turn_progress.add_theme_stylebox_override("fill", _fill_style_bottom)
+	bottom_turn_progress.add_theme_stylebox_override("background", _bg_style_bottom)
+
 func _update_hud_clocks() -> void:
 	var my_bank: float = red_bank_seconds if my_color == XiangqiTypes.PieceColor.RED else black_bank_seconds
 	var opp_bank: float = black_bank_seconds if my_color == XiangqiTypes.PieceColor.RED else red_bank_seconds
@@ -321,13 +342,43 @@ func _update_hud_clocks() -> void:
 	bottom_bank_label.text = _format_time(my_bank)
 	top_bank_label.text = _format_time(opp_bank)
 
-	var turn_str := "Lượt: " + str(int(current_turn_seconds)) + "s"
-	if board != null and board.turn == my_color:
+	var turn_str := "Lượt: " + str(int(ceil(current_turn_seconds))) + "s"
+	var turn_color := Color("2ecc71") # Mặc định xanh lá
+	if current_turn_seconds < 5.0:
+		turn_color = Color("e74c3c") # Dưới 5s: Đỏ
+	elif current_turn_seconds <= 10.0:
+		turn_color = Color("f1c40f") # Dưới hoặc bằng 10s: Vàng
+
+	var is_my_turn := (board != null and board.turn == my_color)
+	if is_my_turn:
 		bottom_turn_label.text = turn_str
+		bottom_turn_label.add_theme_color_override("font_color", turn_color)
 		top_turn_label.text = ""
 	else:
 		top_turn_label.text = turn_str
+		top_turn_label.add_theme_color_override("font_color", turn_color)
 		bottom_turn_label.text = ""
+
+	_update_turn_progress(bottom_turn_progress, _fill_style_bottom, current_turn_seconds, is_my_turn)
+	_update_turn_progress(top_turn_progress, _fill_style_top, current_turn_seconds, not is_my_turn)
+
+func _update_turn_progress(p_bar: ProgressBar, fill_style: StyleBoxFlat, seconds_left: float, is_active: bool) -> void:
+	if not is_active or not is_game_active:
+		p_bar.visible = false
+		p_bar.value = 0.0
+		return
+
+	p_bar.visible = true
+	p_bar.max_value = 30.0
+	p_bar.value = clampf(seconds_left, 0.0, 30.0)
+
+	# Đổi màu theo yêu cầu: dưới 5s đỏ, còn <= 10s vàng, bình thường xanh
+	if seconds_left < 5.0:
+		fill_style.bg_color = Color("e74c3c") # Đỏ
+	elif seconds_left <= 10.0:
+		fill_style.bg_color = Color("f1c40f") # Vàng
+	else:
+		fill_style.bg_color = Color("2ecc71") # Xanh lá
 
 func _format_time(seconds: float) -> String:
 	var s: int = int(seconds)
