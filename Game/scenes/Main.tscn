@@ -75,7 +75,7 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="JoinRoomDialog" type="Control" parent="."]
+[node name="CustomRoomDialog" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -84,7 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dim" type="ColorRect" parent="JoinRoomDialog"]
+[node name="Dim" type="ColorRect" parent="CustomRoomDialog"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,94 +93,156 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.75)
 
-[node name="Panel" type="Panel" parent="JoinRoomDialog"]
-custom_minimum_size = Vector2(500, 380)
+[node name="Panel" type="Panel" parent="CustomRoomDialog"]
+custom_minimum_size = Vector2(560, 520)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -190.0
-offset_right = 250.0
-offset_bottom = 190.0
+offset_left = -280.0
+offset_top = -260.0
+offset_right = 280.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="JoinRoomDialog/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CustomRoomDialog/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = 35.0
-offset_right = -35.0
-offset_bottom = -35.0
+offset_left = 38.0
+offset_top = 34.0
+offset_right = -38.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 alignment = 1
 
-[node name="HeaderLabel" type="Label" parent="JoinRoomDialog/Panel/VBoxContainer"]
+[node name="HeaderLabel" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 26
-text = "🔑 VÀO PHÒNG BẰNG PIN"
+theme_override_font_sizes/font_size = 25
+text = "🏠 PHÒNG RIÊNG (BẠN BÈ)"
 horizontal_alignment = 1
 
-[node name="PromptLabel" type="Label" parent="JoinRoomDialog/Panel/VBoxContainer"]
+[node name="SectionHost" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_constants/separation = 8
+
+[node name="HostTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.8, 1)
 theme_override_font_sizes/font_size = 16
-text = "Nhập mã phòng 6 ký tự do đối thủ chia sẻ:"
-horizontal_alignment = 1
-autowrap_mode = 2
+text = "1. Tạo phòng & chia sẻ mã PIN cho bạn bè:"
 
-[node name="RoomCodeInput" type="LineEdit" parent="JoinRoomDialog/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 52)
+[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.92, 0.5, 1)
+theme_override_constants/separation = 12
+
+[node name="RoomPinDisplay" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 24
-placeholder_text = "VD: K8X9Y2"
-alignment = 1
-max_length = 6
+text = "------"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="JoinRoomDialog/Panel/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="JoinButton" type="Button" parent="JoinRoomDialog/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(170, 52)
+[node name="CreateOrCopyButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox"]
+custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxTexture_gold_norm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gold_norm")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_gold_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
-text = "Tham Gia"
+text = "🎲 Tạo Mã"
 
-[node name="CancelButton" type="Button" parent="JoinRoomDialog/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 52)
+[node name="HostStatusLabel" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.7, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "Bấm 'Tạo Mã' để lấy PIN gửi đối thủ"
+horizontal_alignment = 1
+
+[node name="Divider" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.55, 0.35, 1)
+theme_override_font_sizes/font_size = 14
+text = "─── HOẶC VÀO PHÒNG ĐỐI THỦ ───"
+horizontal_alignment = 1
+
+[node name="SectionJoin" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="JoinTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 16
+text = "2. Nhập mã PIN do đối thủ gửi:"
+
+[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RoomCodeInput" type="LineEdit" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.5, 1)
+theme_override_font_sizes/font_size = 20
+placeholder_text = "VD: K8X9Y2"
+alignment = 1
+max_length = 6
+
+[node name="JoinButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox"]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gold_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
+text = "Vào Phòng"
+
+[node name="BottomHBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CloseButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/BottomHBox"]
+custom_minimum_size = Vector2(150, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.85, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxTexture_menu_norm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_menu_norm")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_menu_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_menu_norm")
-text = "Hủy"
+text = "Đóng"

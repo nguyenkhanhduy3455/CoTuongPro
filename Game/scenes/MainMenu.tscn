@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmw84v2p9l1q4"]
+[gd_scene load_steps=11 format=3 uid="uid://dmw84v2p9l1q4"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_x8q1b"]
 [ext_resource type="Texture2D" uid="uid://b8v7y4d6w2k1m" path="res://assets/sprites/menu_bg.jpg" id="2_bg8m2"]
 [ext_resource type="Texture2D" uid="uid://c5n2x8k9m3q1w" path="res://assets/sprites/btn_normal.png" id="3_btn_norm"]
 [ext_resource type="Texture2D" uid="uid://d3m7y2w9k4q5v" path="res://assets/sprites/btn_pressed.png" id="4_btn_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_icon_settings.png" id="5_icon_set_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_icon_settings_pressed.png" id="6_icon_set_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_icon_exit.png" id="7_icon_exit_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_icon_exit_pressed.png" id="8_icon_exit_press"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_norm"]
 texture = ExtResource("3_btn_norm")
@@ -48,12 +52,43 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.04, 0.05, 0.08, 0.35)
 
+[node name="TopRightBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 32.0
+offset_right = -24.0
+offset_bottom = 96.0
+grow_horizontal = 0
+theme_override_constants/separation = 14
+alignment = 2
+
+[node name="SettingsButton" type="TextureButton" parent="TopRightBar"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+texture_normal = ExtResource("5_icon_set_norm")
+texture_pressed = ExtResource("6_icon_set_press")
+texture_hover = ExtResource("5_icon_set_norm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ExitButton" type="TextureButton" parent="TopRightBar"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+texture_normal = ExtResource("7_icon_exit_norm")
+texture_pressed = ExtResource("8_icon_exit_press")
+texture_hover = ExtResource("7_icon_exit_norm")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="HeaderContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 80.0
-offset_bottom = 260.0
+offset_top = 110.0
+offset_bottom = 280.0
 grow_horizontal = 2
 theme_override_constants/separation = 12
 alignment = 1
@@ -64,7 +99,7 @@ theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 52
 text = "CỜ TƯỚNG XUNG KÍCH"
 horizontal_alignment = 1
 
@@ -85,65 +120,56 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = -120.0
-offset_right = 230.0
-offset_bottom = 370.0
+offset_left = -270.0
+offset_top = -60.0
+offset_right = 270.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PVEButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 68)
+[node name="HBoxRow1" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 23
-theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
-theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
-theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
-text = "🤖 Đấu Với Máy (AI)"
+theme_override_constants/separation = 14
+alignment = 1
 
-[node name="OnlineQueueButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 68)
+[node name="PVEButton" type="Button" parent="VBoxContainer/HBoxRow1"]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
-text = "⚔️ Đấu Online (Xếp Hàng)"
+text = "🤖 Đấu Với Máy"
 
-[node name="CreateRoomButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 68)
+[node name="OnlineQueueButton" type="Button" parent="VBoxContainer/HBoxRow1"]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
-text = "🏠 Tạo Phòng Riêng (PIN)"
+text = "⚔️ Đấu Online"
 
-[node name="JoinRoomButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 68)
+[node name="CustomRoomButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
@@ -151,25 +177,9 @@ theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
-text = "🔑 Vào Phòng Bằng PIN"
-
-[node name="SettingsButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 68)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 23
-theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
-theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
-theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
-text = "⚙️ Cài Đặt"
+text = "🏠 Phòng Riêng (Bạn Bè)"
