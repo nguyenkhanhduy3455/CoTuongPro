@@ -53,7 +53,7 @@ func _ready() -> void:
 	resign_button.pressed.connect(_on_resign_pressed)
 	draw_button.pressed.connect(_on_draw_pressed)
 
-	$ActionBar/MenuButton.pressed.connect(func(): back_to_menu_requested.emit())
+	$ActionBar/MenuButton.pressed.connect(_on_menu_button_pressed)
 	$GameOverDialog/Panel/VBoxContainer/MenuButton.pressed.connect(func(): back_to_menu_requested.emit())
 	$GameOverDialog/Panel/VBoxContainer/RematchButton.pressed.connect(_on_rematch_pressed)
 
@@ -243,6 +243,13 @@ func _on_network_move_applied(data: Dictionary) -> void:
 		to_p
 	)
 
+func _on_menu_button_pressed() -> void:
+	if mode == GameMode.PVP_ONLINE and is_game_active and not online_match_id.is_empty():
+		print("[GAME] Player exiting match to menu -> forfeiting online match")
+		NetworkManager.resign(online_match_id)
+		is_game_active = false
+	back_to_menu_requested.emit()
+
 func _on_network_match_over(data: Dictionary) -> void:
 	var winner_str: String = data.get("winner", "")
 	var reason_str: String = data.get("reason", "")
@@ -252,8 +259,9 @@ func _on_network_match_over(data: Dictionary) -> void:
 	match reason_str:
 		"CHECKMATE": display_reason = "Chiếu bí (Checkmate)"
 		"TIMEOUT": display_reason = "Hết thời gian (Timeout)"
-		"RESIGN": display_reason = "Đầu hàng (Resignation)"
-		"DISCONNECT_TIMEOUT": display_reason = "Mất kết nối quá 60s"
+		"RESIGN": display_reason = "Đối thủ đã xin hàng"
+		"OPPONENT_DISCONNECTED": display_reason = "Đối thủ đã thoát phòng"
+		"DISCONNECT_TIMEOUT": display_reason = "Đối thủ mất kết nối"
 		"DRAW_AGREED": display_reason = "Hòa theo thỏa thuận"
 		"STALEMATE": display_reason = "Hết nước đi (Stalemate)"
 

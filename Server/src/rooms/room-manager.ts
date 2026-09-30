@@ -478,11 +478,24 @@ export class RoomManager {
   }
 
   /**
-   * Handles player disconnect with 60-second grace period.
+   * Handles player disconnect. Immediately concludes match in favor of remaining player.
    */
   public handlePlayerDisconnect(playerId: string): void {
     const matchId = this.playerToMatch.get(playerId);
-    if (!matchId) return;
+    if (!matchId) {
+      const roomCode = this.playerToRoom.get(playerId);
+      if (roomCode) {
+        const room = this.rooms.get(roomCode);
+        if (room && room.status === 'WAITING') {
+          room.players.delete(playerId);
+          this.playerToRoom.delete(playerId);
+          if (room.players.size === 0) {
+            this.rooms.delete(roomCode);
+          }
+        }
+      }
+      return;
+    }
 
     const match = this.matches.get(matchId);
     if (!match || match.status !== 'PLAYING') return;
@@ -499,26 +512,14 @@ export class RoomManager {
     player.isConnected = false;
     player.disconnectedAt = Date.now();
 
-    this.events.onOpponentStatus?.(match, playerId, 'DISCONNECTED', 60);
+    // Immediately award victory to the remaining player
+    const winner: PieceColor = player.color === 'RED' ? 'BLACK' : 'RED';
+    match.status = 'FINISHED';
+    match.winner = winner;
+    match.winReason = 'OPPONENT_DISCONNECTED';
+    this.clockManager.stopClock(matchId);
 
-    // Cancel existing timer if any
-    const existing = this.disconnectTimers.get(playerId);
-    if (existing) clearTimeout(existing);
-
-    // 60-second grace period
-    const timer = setTimeout(() => {
-      this.disconnectTimers.delete(playerId);
-      if (!player.isConnected && match.status === 'PLAYING') {
-        const winner: PieceColor = player.color === 'RED' ? 'BLACK' : 'RED';
-        match.status = 'FINISHED';
-        match.winner = winner;
-        match.winReason = 'DISCONNECT_TIMEOUT';
-        this.clockManager.stopClock(matchId);
-        this.events.onMatchOver?.(match, winner, 'DISCONNECT_TIMEOUT');
-      }
-    }, 60000);
-
-    this.disconnectTimers.set(playerId, timer);
+    this.events.onMatchOver?.(match, winner, 'OPPONENT_DISCONNECTED');
   }
 
   /**
