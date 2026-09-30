@@ -1,6 +1,6 @@
-# Cờ Tướng Pro - Godot 4.x Client (Android & Cross-Platform)
+# Cờ Tướng Xung Kích - Godot 4.x Client (Android & Cross-Platform)
 
-A production-ready, modular, responsive 2D Chinese Chess (Xiangqi / Cờ Tướng) client built in **Godot 4.3 (GDScript)**, optimized for Android touch input, multi-resolution screens, notch safe areas, and portrait/landscape responsive layouts.
+A production-ready, modular, responsive 2D Chinese Chess (Xiangqi / Cờ Tướng Xung Kích) client built in **Godot 4.3 (GDScript)**, optimized for Android touch input, multi-resolution screens, notch safe areas, and portrait/landscape responsive layouts.
 
 ---
 

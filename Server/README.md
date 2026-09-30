@@ -1,6 +1,6 @@
-# Cờ Tướng Pro - Real-time Xiangqi Game Server
+# Cờ Tướng Xung Kích - Real-time Xiangqi Game Server
 
-A production-ready, clean-architecture real-time Chinese Chess (Xiangqi / Cờ Tướng) server built with **Node.js (v20+)**, **Fastify**, **TypeScript**, and **WebSockets**.
+A production-ready, clean-architecture real-time Chinese Chess (Xiangqi / Cờ Tướng Xung Kích) server built with **Node.js (v20+)**, **Fastify**, **TypeScript**, and **WebSockets**.
 
 ---
 
