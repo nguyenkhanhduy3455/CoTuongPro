@@ -1,30 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://df2m4c8v1t7k3"]
+[gd_scene load_steps=8 format=3 uid="uid://df2m4c8v1t7k3"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings_dialog.gd" id="1_w8k4e"]
 [ext_resource type="Texture2D" path="res://assets/sprites/dialog_frame.png" id="2_dialog_frame"]
-[ext_resource type="Texture2D" path="res://assets/sprites/btn_normal.png" id="3_btn_norm"]
-[ext_resource type="Texture2D" path="res://assets/sprites/btn_pressed.png" id="4_btn_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_gold.png" id="3_gold_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_gold_pressed.png" id="4_gold_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_menu.png" id="5_menu_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_menu_pressed.png" id="6_menu_press"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog"]
 texture = ExtResource("2_dialog_frame")
-texture_margin_left = 32.0
-texture_margin_top = 32.0
-texture_margin_right = 32.0
-texture_margin_bottom = 32.0
+texture_margin_left = 44.0
+texture_margin_top = 44.0
+texture_margin_right = 44.0
+texture_margin_bottom = 44.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_norm"]
-texture = ExtResource("3_btn_norm")
-texture_margin_left = 36.0
-texture_margin_top = 18.0
-texture_margin_right = 36.0
-texture_margin_bottom = 18.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gold_norm"]
+texture = ExtResource("3_gold_norm")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_press"]
-texture = ExtResource("4_btn_press")
-texture_margin_left = 36.0
-texture_margin_top = 18.0
-texture_margin_right = 36.0
-texture_margin_bottom = 18.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gold_press"]
+texture = ExtResource("4_gold_press")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_menu_norm"]
+texture = ExtResource("5_menu_norm")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_menu_press"]
+texture = ExtResource("6_menu_press")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
 
 [node name="SettingsDialog" type="Control"]
 layout_mode = 3
@@ -143,23 +159,23 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxTexture_btn_norm")
-theme_override_styles/hover = SubResource("StyleBoxTexture_btn_norm")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_press")
-theme_override_styles/focus = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gold_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
 text = "Lưu Cài Đặt"
 
 [node name="CloseButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(140, 52)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.85, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxTexture_btn_norm")
-theme_override_styles/hover = SubResource("StyleBoxTexture_btn_norm")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_press")
-theme_override_styles/focus = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_menu_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_menu_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_menu_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_menu_norm")
 text = "Đóng"
