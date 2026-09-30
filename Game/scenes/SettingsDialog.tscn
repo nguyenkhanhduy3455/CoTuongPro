@@ -61,17 +61,17 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.75)
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(560, 680)
+custom_minimum_size = Vector2(540, 490)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -280.0
-offset_top = -340.0
-offset_right = 280.0
-offset_bottom = 340.0
+offset_left = -270.0
+offset_top = -245.0
+offset_right = 270.0
+offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
@@ -81,10 +81,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = 30.0
-offset_right = -35.0
-offset_bottom = -30.0
+offset_left = 38.0
+offset_top = 34.0
+offset_right = -38.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
@@ -95,7 +95,7 @@ theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "⚙️ CÀI ĐẶT HỆ THỐNG"
 horizontal_alignment = 1
 
@@ -105,53 +105,40 @@ layout_mode = 2
 [node name="NameTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 16
 text = "Tên Kỳ Thủ:"
 
 [node name="NameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 44)
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 placeholder_text = "Nhập tên của bạn"
-
-[node name="ServerTitle" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
-text = "Máy Chủ WebSocket (Server URL):"
-
-[node name="ServerEdit" type="LineEdit" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-text = "ws://127.0.0.1:8080/ws"
 
 [node name="DiffTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 16
 text = "Độ Khó Máy AI:"
 
 [node name="DifficultyOption" type="OptionButton" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 44)
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-
-[node name="CutsceneTitle" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
-text = "Chế Độ Battle Cutscenes:"
-
-[node name="CutsceneOption" type="OptionButton" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
+theme_override_font_sizes/font_size = 17
 
 [node name="SoundCheck" type="CheckBox" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 16
 button_pressed = true
 text = "Bật Âm Thanh Chiến Trận"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(180, 52)
+custom_minimum_size = Vector2(170, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
@@ -166,7 +153,7 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
 text = "Lưu Cài Đặt"
 
 [node name="CloseButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(140, 52)
+custom_minimum_size = Vector2(140, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.85, 1, 1)
