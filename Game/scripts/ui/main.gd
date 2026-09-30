@@ -9,11 +9,11 @@ extends Control
 
 # Unified Custom Room Dialog
 @onready var custom_room_dialog: Control = $CustomRoomDialog
-@onready var room_pin_display: Label = $CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox/RoomPinDisplay
-@onready var create_or_copy_button: Button = $CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox/CreateOrCopyButton
-@onready var host_status_label: Label = $CustomRoomDialog/Panel/VBoxContainer/SectionHost/HostStatusLabel
-@onready var room_code_input: LineEdit = $CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox/RoomCodeInput
-@onready var join_room_button: Button = $CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox/JoinButton
+@onready var room_pin_display: Label = $CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox/HBox/RoomPinDisplay
+@onready var create_or_copy_button: Button = $CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox/HBox/CreateOrCopyButton
+@onready var host_status_label: Label = $CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox/HostStatusLabel
+@onready var room_code_input: LineEdit = $CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox/HBox/RoomCodeInput
+@onready var join_room_button: Button = $CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox/HBox/JoinButton
 @onready var close_room_dialog_button: Button = $CustomRoomDialog/Panel/VBoxContainer/BottomHBox/CloseButton
 
 var current_created_room_pin: String = ""

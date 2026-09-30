@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpsa4j8t2m9q1"]
+[gd_scene load_steps=15 format=3 uid="uid://dpsa4j8t2m9q1"]
 
 [ext_resource type="Script" path="res://scripts/ui/main.gd" id="1_a5v8q"]
 [ext_resource type="PackedScene" uid="uid://dmw84v2p9l1q4" path="res://scenes/MainMenu.tscn" id="2_m8w1k"]
@@ -18,6 +18,38 @@ texture_margin_left = 44.0
 texture_margin_top = 44.0
 texture_margin_right = 44.0
 texture_margin_bottom = 44.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+bg_color = Color(0.08, 0.05, 0.04, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.65, 0.3, 0.35)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pin_box"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.04, 0.03, 0.02, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.72, 0.35, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gold_norm"]
 texture = ExtResource("8_gold_norm")
@@ -94,17 +126,17 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.75)
 
 [node name="Panel" type="Panel" parent="CustomRoomDialog"]
-custom_minimum_size = Vector2(560, 520)
+custom_minimum_size = Vector2(580, 560)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -280.0
-offset_top = -260.0
-offset_right = 280.0
-offset_bottom = 260.0
+offset_left = -290.0
+offset_top = -280.0
+offset_right = 290.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
@@ -114,13 +146,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 38.0
+offset_left = 40.0
 offset_top = 34.0
-offset_right = -38.0
+offset_right = -40.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="HeaderLabel" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer"]
@@ -129,38 +161,46 @@ theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 25
-text = "🏠 PHÒNG RIÊNG (BẠN BÈ)"
+theme_override_font_sizes/font_size = 26
+text = "🏠 PHÒNG BẠN BÈ"
 horizontal_alignment = 1
 
-[node name="SectionHost" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+[node name="HostCard" type="PanelContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HostTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
+[node name="HostTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.9, 0.8, 1)
+theme_override_colors/font_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 16
-text = "1. Tạo phòng & chia sẻ mã PIN cho bạn bè:"
+text = "👑 Tạo phòng mới & chia sẻ PIN:"
 
-[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
+[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="RoomPinDisplay" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox"]
+[node name="RoomPinDisplay" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox/HBox"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.4, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_pin_box")
 text = "------"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreateOrCopyButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost/HBox"]
+[node name="CreateOrCopyButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox/HBox"]
 custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
@@ -175,35 +215,42 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gold_press")
 theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
 text = "🎲 Tạo Mã"
 
-[node name="HostStatusLabel" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionHost"]
+[node name="HostStatusLabel" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/HostCard/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.7, 0.6, 1)
+theme_override_colors/font_color = Color(0.8, 0.75, 0.65, 1)
 theme_override_font_sizes/font_size = 13
 text = "Bấm 'Tạo Mã' để lấy PIN gửi đối thủ"
 horizontal_alignment = 1
 
 [node name="Divider" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.55, 0.35, 1)
+theme_override_colors/font_color = Color(0.7, 0.6, 0.4, 1)
 theme_override_font_sizes/font_size = 14
-text = "─── HOẶC VÀO PHÒNG ĐỐI THỦ ───"
+text = "─────── HOẶC VÀO PHÒNG ───────"
 horizontal_alignment = 1
 
-[node name="SectionJoin" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+[node name="JoinCard" type="PanelContainer" parent="CustomRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/JoinCard"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="JoinTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin"]
+[node name="JoinTitle" type="Label" parent="CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.9, 0.8, 1)
+theme_override_colors/font_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 16
-text = "2. Nhập mã PIN do đối thủ gửi:"
+text = "⚔️ Nhập mã PIN do bạn bè gửi:"
 
-[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin"]
+[node name="HBox" type="HBoxContainer" parent="CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="RoomCodeInput" type="LineEdit" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox"]
+[node name="RoomCodeInput" type="LineEdit" parent="CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox/HBox"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -213,7 +260,7 @@ placeholder_text = "VD: K8X9Y2"
 alignment = 1
 max_length = 6
 
-[node name="JoinButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/SectionJoin/HBox"]
+[node name="JoinButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/JoinCard/VBox/HBox"]
 custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
@@ -233,7 +280,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="CloseButton" type="Button" parent="CustomRoomDialog/Panel/VBoxContainer/BottomHBox"]
-custom_minimum_size = Vector2(150, 48)
+custom_minimum_size = Vector2(160, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.85, 1, 1)
