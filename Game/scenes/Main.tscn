@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpsa4j8t2m9q1"]
+[gd_scene load_steps=12 format=3 uid="uid://dpsa4j8t2m9q1"]
 
 [ext_resource type="Script" path="res://scripts/ui/main.gd" id="1_a5v8q"]
 [ext_resource type="PackedScene" uid="uid://dmw84v2p9l1q4" path="res://scenes/MainMenu.tscn" id="2_m8w1k"]
@@ -6,6 +6,46 @@
 [ext_resource type="PackedScene" uid="uid://cx60m1r5k7t9l" path="res://scenes/MatchmakingLobby.tscn" id="4_l2n5m"]
 [ext_resource type="PackedScene" uid="uid://df2m4c8v1t7k3" path="res://scenes/SettingsDialog.tscn" id="5_s9k2w"]
 [ext_resource type="PackedScene" uid="uid://c3y4h8s8j1w9v" path="res://scenes/CutsceneOverlay.tscn" id="6_c1v7r"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dialog_frame.png" id="7_dialog_frame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_gold.png" id="8_gold_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_gold_pressed.png" id="9_gold_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_menu.png" id="10_menu_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_menu_pressed.png" id="11_menu_press"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog"]
+texture = ExtResource("7_dialog_frame")
+texture_margin_left = 44.0
+texture_margin_top = 44.0
+texture_margin_right = 44.0
+texture_margin_bottom = 44.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gold_norm"]
+texture = ExtResource("8_gold_norm")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gold_press"]
+texture = ExtResource("9_gold_press")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_menu_norm"]
+texture = ExtResource("10_menu_norm")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_menu_press"]
+texture = ExtResource("11_menu_press")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -35,18 +75,112 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="JoinRoomDialog" type="ConfirmationDialog" parent="."]
-title = "Vào Phòng Bằng PIN"
-initial_position = 2
-size = Vector2i(420, 200)
-ok_button_text = "Tham Gia"
-cancel_button_text = "Hủy"
+[node name="JoinRoomDialog" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="RoomCodeInput" type="LineEdit" parent="JoinRoomDialog"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 412.0
-offset_bottom = 151.0
-placeholder_text = "Nhập mã phòng 6 ký tự (VD: K8X9Y2)"
+[node name="Dim" type="ColorRect" parent="JoinRoomDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Panel" type="Panel" parent="JoinRoomDialog"]
+custom_minimum_size = Vector2(500, 380)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -190.0
+offset_right = 250.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinRoomDialog/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 35.0
+offset_right = -35.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HeaderLabel" type="Label" parent="JoinRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 26
+text = "🔑 VÀO PHÒNG BẰNG PIN"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="JoinRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 16
+text = "Nhập mã phòng 6 ký tự do đối thủ chia sẻ:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RoomCodeInput" type="LineEdit" parent="JoinRoomDialog/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.5, 1)
+theme_override_font_sizes/font_size = 24
+placeholder_text = "VD: K8X9Y2"
 alignment = 1
 max_length = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="JoinRoomDialog/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="JoinButton" type="Button" parent="JoinRoomDialog/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gold_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gold_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_gold_norm")
+text = "Tham Gia"
+
+[node name="CancelButton" type="Button" parent="JoinRoomDialog/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.85, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_menu_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_menu_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_menu_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_menu_norm")
+text = "Hủy"

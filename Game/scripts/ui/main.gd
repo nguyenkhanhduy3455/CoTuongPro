@@ -6,8 +6,10 @@ extends Control
 @onready var matchmaking_lobby: MatchmakingLobby = $MatchmakingLobby
 @onready var settings_dialog: SettingsDialog = $SettingsDialog
 @onready var cutscene_overlay: CutsceneOverlay = $CutsceneOverlay
-@onready var join_room_dialog: ConfirmationDialog = $JoinRoomDialog
-@onready var room_code_input: LineEdit = $JoinRoomDialog/RoomCodeInput
+@onready var join_room_dialog: Control = $JoinRoomDialog
+@onready var room_code_input: LineEdit = $JoinRoomDialog/Panel/VBoxContainer/RoomCodeInput
+@onready var join_room_button: Button = $JoinRoomDialog/Panel/VBoxContainer/HBoxContainer/JoinButton
+@onready var cancel_room_button: Button = $JoinRoomDialog/Panel/VBoxContainer/HBoxContainer/CancelButton
 
 func _ready() -> void:
 	_show_main_menu()
@@ -21,7 +23,9 @@ func _ready() -> void:
 	matchmaking_lobby.cancel_requested.connect(_on_cancel_lobby)
 	game_view.back_to_menu_requested.connect(_show_main_menu)
 
-	join_room_dialog.confirmed.connect(_on_join_room_confirmed)
+	join_room_button.pressed.connect(_on_join_room_confirmed)
+	cancel_room_button.pressed.connect(func(): join_room_dialog.visible = false)
+	room_code_input.text_submitted.connect(func(_text: String): _on_join_room_confirmed())
 
 	_setup_network_handlers()
 
@@ -30,6 +34,7 @@ func _show_main_menu() -> void:
 	game_view.visible = false
 	matchmaking_lobby.visible = false
 	settings_dialog.visible = false
+	join_room_dialog.visible = false
 
 func _on_play_pve() -> void:
 	main_menu.visible = false
@@ -60,13 +65,18 @@ func _on_create_room() -> void:
 		, CONNECT_ONE_SHOT)
 
 func _on_open_join_modal() -> void:
+	join_room_dialog.visible = true
 	room_code_input.text = ""
-	join_room_dialog.popup_centered()
+	# Auto-focus input field and open virtual keyboard on mobile
+	get_tree().create_timer(0.05).timeout.connect(func():
+		room_code_input.grab_focus()
+	)
 
 func _on_join_room_confirmed() -> void:
 	var code := room_code_input.text.strip_edges().to_upper()
 	if code.length() >= 4:
 		print("[MAIN] User joining room: ", code)
+		join_room_dialog.visible = false
 		main_menu.visible = false
 		matchmaking_lobby.visible = true
 		matchmaking_lobby.show_queue_mode(1)
