@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpsa4j8t2m9q1"]
+
+[ext_resource type="Script" path="res://scripts/ui/main.gd" id="1_a5v8q"]
+[ext_resource type="PackedScene" uid="uid://dmw84v2p9l1q4" path="res://scenes/MainMenu.tscn" id="2_m8w1k"]
+[ext_resource type="PackedScene" uid="uid://b0y5n7r2p3k8w" path="res://scenes/GameView.tscn" id="3_g7x4j"]
+[ext_resource type="PackedScene" uid="uid://cx60m1r5k7t9l" path="res://scenes/MatchmakingLobby.tscn" id="4_l2n5m"]
+[ext_resource type="PackedScene" uid="uid://df2m4c8v1t7k3" path="res://scenes/SettingsDialog.tscn" id="5_s9k2w"]
+[ext_resource type="PackedScene" uid="uid://c3y4h8s8j1w9v" path="res://scenes/CutsceneOverlay.tscn" id="6_c1v7r"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5v8q")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_m8w1k")]
+layout_mode = 1
+
+[node name="GameView" parent="." instance=ExtResource("3_g7x4j")]
+visible = false
+layout_mode = 1
+
+[node name="MatchmakingLobby" parent="." instance=ExtResource("4_l2n5m")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsDialog" parent="." instance=ExtResource("5_s9k2w")]
+visible = false
+layout_mode = 1
+
+[node name="CutsceneOverlay" parent="." instance=ExtResource("6_c1v7r")]
+visible = false
+layout_mode = 1
+
+[node name="JoinRoomDialog" type="ConfirmationDialog" parent="."]
+title = "Vào Phòng Bằng PIN"
+initial_position = 2
+size = Vector2i(420, 200)
+ok_button_text = "Tham Gia"
+cancel_button_text = "Hủy"
+
+[node name="RoomCodeInput" type="LineEdit" parent="JoinRoomDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 412.0
+offset_bottom = 151.0
+placeholder_text = "Nhập mã phòng 6 ký tự (VD: K8X9Y2)"
+alignment = 1
+max_length = 6

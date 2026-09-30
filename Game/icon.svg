@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#1c1d24" />
+  <circle cx="64" cy="64" r="50" fill="#c0392b" stroke="#e74c3c" stroke-width="4" />
+  <circle cx="64" cy="64" r="42" fill="#962d22" />
+  <text x="64" y="76" font-family="sans-serif" font-size="38" font-weight="bold" fill="#f1c40f" text-anchor="middle">帥</text>
+</svg>

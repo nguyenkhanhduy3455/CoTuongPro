@@ -1,0 +1,39 @@
+{
+  "name": "cotuong-server",
+  "version": "1.0.0",
+  "description": "Production-ready real-time Chinese Chess (Xiangqi / Cờ Tướng) server built with Fastify, WebSockets, and TypeScript.",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "xiangqi",
+    "chinese-chess",
+    "co-tuong",
+    "fastify",
+    "websocket",
+    "clean-architecture",
+    "game-engine"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "@fastify/websocket": "^11.0.2",
+    "fastify": "^5.2.1",
+    "ws": "^8.18.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "@types/ws": "^8.5.14",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}

@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=3 uid="uid://df2m4c8v1t7k3"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings_dialog.gd" id="1_w8k4e"]
+
+[node name="SettingsDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w8k4e")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(560, 680)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -340.0
+offset_right = 280.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="HeaderLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "⚙️ CÀI ĐẶT HỆ THỐNG"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameTitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tên Kỳ Thủ:"
+
+[node name="NameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+placeholder_text = "Nhập tên của bạn"
+
+[node name="ServerTitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Máy Chủ WebSocket (Server URL):"
+
+[node name="ServerEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "ws://127.0.0.1:8080/ws"
+
+[node name="DiffTitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Độ Khó Máy AI:"
+
+[node name="DifficultyOption" type="OptionButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="CutsceneTitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Chế Độ Battle Cutscenes:"
+
+[node name="CutsceneOption" type="OptionButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="SoundCheck" type="CheckBox" parent="Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Bật Âm Thanh Chiến Trận"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Lưu Cài Đặt"
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Đóng"

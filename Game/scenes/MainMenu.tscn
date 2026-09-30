@@ -1,0 +1,175 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmw84v2p9l1q4"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_x8q1b"]
+[ext_resource type="Texture2D" uid="uid://b8v7y4d6w2k1m" path="res://assets/sprites/menu_bg.jpg" id="2_bg8m2"]
+[ext_resource type="Texture2D" uid="uid://c5n2x8k9m3q1w" path="res://assets/sprites/btn_normal.png" id="3_btn_norm"]
+[ext_resource type="Texture2D" uid="uid://d3m7y2w9k4q5v" path="res://assets/sprites/btn_pressed.png" id="4_btn_press"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_norm"]
+texture = ExtResource("3_btn_norm")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_press"]
+texture = ExtResource("4_btn_press")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x8q1b")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg8m2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="OverlayTint" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.05, 0.08, 0.35)
+
+[node name="HeaderContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 80.0
+offset_bottom = 260.0
+grow_horizontal = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="LogoLabel" type="Label" parent="HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 56
+text = "CỜ TƯỚNG PRO"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "Đỉnh Cao Trí Tuệ & Chiến Thuật Cổ Điển"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -120.0
+offset_right = 230.0
+offset_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="PVEButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
+text = "🤖 Đấu Với Máy (AI)"
+
+[node name="OnlineQueueButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
+text = "⚔️ Đấu Online (Xếp Hàng)"
+
+[node name="CreateRoomButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
+text = "🏠 Tạo Phòng Riêng (PIN)"
+
+[node name="JoinRoomButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
+text = "🔑 Vào Phòng Bằng PIN"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxTexture_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_norm")
+text = "⚙️ Cài Đặt"
