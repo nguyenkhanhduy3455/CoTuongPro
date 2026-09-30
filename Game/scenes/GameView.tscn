@@ -9,6 +9,30 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/btn_resign_pressed.png" id="7_resign_press"]
 [ext_resource type="Texture2D" path="res://assets/sprites/btn_menu.png" id="8_menu_norm"]
 [ext_resource type="Texture2D" path="res://assets/sprites/btn_menu_pressed.png" id="9_menu_press"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dialog_frame.png" id="10_dialog_frame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_normal.png" id="11_btn_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_pressed.png" id="12_btn_press"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog"]
+texture = ExtResource("10_dialog_frame")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_modal_btn_norm"]
+texture = ExtResource("11_btn_norm")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_modal_btn_press"]
+texture = ExtResource("12_btn_press")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_draw_norm"]
 texture = ExtResource("4_draw_norm")
@@ -295,29 +319,30 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.8)
 
 [node name="Panel" type="Panel" parent="GameOverDialog"]
-custom_minimum_size = Vector2(460, 360)
+custom_minimum_size = Vector2(480, 380)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = -180.0
-offset_right = 230.0
-offset_bottom = 180.0
+offset_left = -240.0
+offset_top = -190.0
+offset_right = 240.0
+offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverDialog/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = 30.0
-offset_right = -30.0
-offset_bottom = -30.0
+offset_left = 35.0
+offset_top = 35.0
+offset_right = -35.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -325,25 +350,49 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="GameOverDialog/Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 38
 text = "🏆 CHIẾN THẮNG!"
 horizontal_alignment = 1
 
 [node name="SubtitleLabel" type="Label" parent="GameOverDialog/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 18
 text = "Chiếu bí đối phương"
 horizontal_alignment = 1
 
 [node name="RematchButton" type="Button" parent="GameOverDialog/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_modal_btn_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_modal_btn_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_modal_btn_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_modal_btn_norm")
 text = "🔄 Đấu Lại"
 
 [node name="MenuButton" type="Button" parent="GameOverDialog/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_modal_btn_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_modal_btn_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_modal_btn_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_modal_btn_norm")
 text = "🏠 Trở Về Menu Chính"

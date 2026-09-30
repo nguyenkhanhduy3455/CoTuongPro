@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://df2m4c8v1t7k3"]
+[gd_scene load_steps=6 format=3 uid="uid://df2m4c8v1t7k3"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings_dialog.gd" id="1_w8k4e"]
+[ext_resource type="Texture2D" path="res://assets/sprites/dialog_frame.png" id="2_dialog_frame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_normal.png" id="3_btn_norm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/btn_pressed.png" id="4_btn_press"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog"]
+texture = ExtResource("2_dialog_frame")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_norm"]
+texture = ExtResource("3_btn_norm")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_press"]
+texture = ExtResource("4_btn_press")
+texture_margin_left = 36.0
+texture_margin_top = 18.0
+texture_margin_right = 36.0
+texture_margin_bottom = 18.0
 
 [node name="SettingsDialog" type="Control"]
 layout_mode = 3
@@ -34,22 +58,27 @@ offset_right = 280.0
 offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dialog")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = 25.0
-offset_right = -30.0
-offset_bottom = -25.0
+offset_left = 35.0
+offset_top = 30.0
+offset_right = -35.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 
 [node name="HeaderLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 28
 text = "⚙️ CÀI ĐẶT HỆ THỐNG"
 horizontal_alignment = 1
@@ -59,6 +88,7 @@ layout_mode = 2
 
 [node name="NameTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
 text = "Tên Kỳ Thủ:"
 
 [node name="NameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
@@ -68,6 +98,7 @@ placeholder_text = "Nhập tên của bạn"
 
 [node name="ServerTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
 text = "Máy Chủ WebSocket (Server URL):"
 
 [node name="ServerEdit" type="LineEdit" parent="Panel/VBoxContainer"]
@@ -77,6 +108,7 @@ text = "ws://127.0.0.1:8080/ws"
 
 [node name="DiffTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
 text = "Độ Khó Máy AI:"
 
 [node name="DifficultyOption" type="OptionButton" parent="Panel/VBoxContainer"]
@@ -85,6 +117,7 @@ layout_mode = 2
 
 [node name="CutsceneTitle" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
 text = "Chế Độ Battle Cutscenes:"
 
 [node name="CutsceneOption" type="OptionButton" parent="Panel/VBoxContainer"]
@@ -101,12 +134,32 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 52)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn_norm")
 text = "Lưu Cài Đặt"
 
-[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 44)
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 52)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn_norm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_press")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn_norm")
 text = "Đóng"
